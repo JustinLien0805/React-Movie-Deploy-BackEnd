@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
+    "start": "node --experimental-specifier-resolution=node index.js",
     "devStart": "nodemon --experimental-specifier-resolution=node index.js",
     "heroku-postbuild": "npm run build"
   },
