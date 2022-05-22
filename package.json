@@ -8,12 +8,11 @@
     "node": "16.15.0"
   },
   "scripts": {
-    "build": "npx prisma generate",
+    "build": "npx prisma migrate deploy",
     "prepare": "npx prisma generate",
     "dev": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --experimental-specifier-resolution=node index.js",
-    "heroku-postbuild": "npx prisma migrate dev && npm run build"
+    "start": "node --experimental-specifier-resolution=node index.js"
   },
   "author": "",
   "license": "ISC",
