@@ -8,12 +8,9 @@
     "node": "16.15.0"
   },
   "scripts": {
-    "dev": "react-scripts start",
-    "start": "serve -s build",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "npm run build"
+    "build": "prisma generate",
+    "dev": "PORT=3000 node src/index.js",
+    "start": "node --experimental-specifier-resolution=node index.js"
   },
   "author": "",
   "license": "ISC",
