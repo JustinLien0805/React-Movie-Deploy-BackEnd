@@ -11,7 +11,8 @@
     "build": "prisma generate",
     "dev": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --experimental-specifier-resolution=node index.js"
+    "start": "node --experimental-specifier-resolution=node index.js",
+    "heroku-postbuild": "npx prisma migrate dev && npm build:production"
   },
   "author": "",
   "license": "ISC",
