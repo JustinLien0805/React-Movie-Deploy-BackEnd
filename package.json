@@ -8,7 +8,8 @@
     "node": "16.15.0"
   },
   "scripts": {
-    "build": "prisma generate",
+    "build": "npx prisma generate",
+    "prepare": "npx prisma generate",
     "dev": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node --experimental-specifier-resolution=node index.js",
