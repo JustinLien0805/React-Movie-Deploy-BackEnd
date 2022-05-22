@@ -13,7 +13,7 @@ app.use(express.json());
 const PORT = process.env.PORT || 3001
 // choose port
 app.listen(PORT, () => {
-  console.log("server run on port 3001");
+  console.log("server run on port ",PORT);
 });
 
 // ******************* Login and Registration *********************************
