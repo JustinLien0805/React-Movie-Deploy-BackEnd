@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = env("mysql://b2b73445d6bbea:fc326968@us-cdbr-east-05.cleardb.net/heroku_d1efb482b264d10?reconnect=true")
+  url      = "mysql://b2b73445d6bbea:fc326968@us-cdbr-east-05.cleardb.net/heroku_d1efb482b264d10?reconnect=true"
 }
 
 model Movie {
