@@ -184,7 +184,7 @@ app.post("/likePost", validateToken, async (req, res) => {
   const uid = req.user.id;
   //req.user.id from middleware
   const likePost =
-    await prisma.$queryRaw`INSERT INTO mydb.Like (Post_post_id, User_user_id) VALUES (${pid}, ${uid});`;
+    await prisma.$queryRaw`INSERT INTO heroku_d1efb482b264d10.Like (Post_post_id, User_user_id) VALUES (${pid}, ${uid});`;
   res.json("success likeing post");
 });
 
@@ -192,7 +192,7 @@ app.post("/removeLike", validateToken, async (req, res) => {
   const { pid } = req.body;
   const uid = req.user.id;
   const removeLike =
-    await prisma.$queryRaw`DELETE FROM mydb.Like WHERE (Post_post_id = ${pid} ) and (User_user_id = ${uid});`;
+    await prisma.$queryRaw`DELETE FROM heroku_d1efb482b264d10.Like WHERE (Post_post_id = ${pid} ) and (User_user_id = ${uid});`;
   res.json("success remove likeing post");
 });
 
@@ -200,7 +200,7 @@ app.post("/checkLike", validateToken, async (req, res) => {
   const { pid } = req.body;
   const uid = req.user.id;
   const checkLike =
-    await prisma.$queryRaw`SELECT * FROM mydb.Like where Post_post_id = ${pid} and User_user_id = ${uid} ;`;
+    await prisma.$queryRaw`SELECT * FROM heroku_d1efb482b264d10.Like where Post_post_id = ${pid} and User_user_id = ${uid} ;`;
   if (checkLike.length > 0) {
     res.json(`user like the post ${pid}, ${uid}`);
   }
@@ -214,7 +214,7 @@ app.post("/deletePost", validateToken, async (req, res) => {
       post_id: parseInt(pid),
     },
   });
-  const deletePostLike = prisma.$queryRaw`DELETE FROM mydb.Like WHERE  (Post_post_id = ${pid} )`;
+  const deletePostLike = prisma.$queryRaw`DELETE FROM heroku_d1efb482b264d10.Like WHERE  (Post_post_id = ${pid} )`;
   const transaction = await prisma.$transaction([deletePostLike, deletePost]);
   const posts = await prisma.Post.findMany({
     where: {
@@ -289,6 +289,6 @@ app.post("/checkMovieRate", validateToken, async (req, res) => {
 app.post("/totalLikes", async (req, res) => {
   const { pid } = req.body;
   const likes =
-    await prisma.$queryRaw`SELECT count(*) as 'likes' FROM mydb.Like where Post_post_id = ${pid}`;
+    await prisma.$queryRaw`SELECT count(*) as 'likes' FROM heroku_d1efb482b264d10.Like where Post_post_id = ${pid}`;
   res.json(likes);
 });
