@@ -7,30 +7,30 @@ import { validateToken } from "./middleware/AuthMiddleware";
 const prisma = new PrismaClient();
 
 const app = express();
-// Add headers before the routes are defined
-app.use(function (req, res, next) {
-  // Website you wish to allow to connect
-  res.setHeader("Access-Control-Allow-Origin", "*");
+// // Add headers before the routes are defined
+// app.use(function (req, res, next) {
+//   // Website you wish to allow to connect
+//   res.setHeader("Access-Control-Allow-Origin", "*");
 
-  // Request methods you wish to allow
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
+//   // Request methods you wish to allow
+//   res.setHeader(
+//     "Access-Control-Allow-Methods",
+//     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+//   );
 
-  // Request headers you wish to allow
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type"
-  );
+//   // Request headers you wish to allow
+//   res.setHeader(
+//     "Access-Control-Allow-Headers",
+//     "X-Requested-With,content-type"
+//   );
 
-  // Set to true if you need the website to include cookies in the requests sent
-  // to the API (e.g. in case you use sessions)
-  res.setHeader("Access-Control-Allow-Credentials", true);
+//   // Set to true if you need the website to include cookies in the requests sent
+//   // to the API (e.g. in case you use sessions)
+//   res.setHeader("Access-Control-Allow-Credentials", true);
 
-  // Pass to next layer of middleware
-  next();
-});
+//   // Pass to next layer of middleware
+//   next();
+// });
 app.use(
   cors({
     origin: "https://profound-seahorse-6f3f2b.netlify.app",
@@ -183,16 +183,21 @@ app.post("/likePost", validateToken, async (req, res) => {
   const { pid } = req.body;
   const uid = req.user.id;
   //req.user.id from middleware
-  const likePost =
-    await prisma.$queryRaw`INSERT INTO heroku_d1efb482b264d10.Like (Post_post_id, User_user_id) VALUES (${pid}, ${uid});`;
+  const likePost = await prisma.Like.create({
+    data: {
+      Post_post_id: pid,
+      User_user_id: uid,
+    },
+  });
+  //.$queryRaw`INSERT INTO heroku_d1efb482b264d10.Like (Post_post_id, User_user_id) VALUES (${pid}, ${uid});`;
+
   res.json("success likeing post");
 });
 
 app.post("/removeLike", validateToken, async (req, res) => {
   const { pid } = req.body;
   const uid = req.user.id;
-  const removeLike =
-    await prisma.$queryRaw`DELETE FROM heroku_d1efb482b264d10.Like WHERE (Post_post_id = ${pid} ) and (User_user_id = ${uid});`;
+  const removeLike = await prisma..$queryRaw`DELETE FROM heroku_d1efb482b264d10.Like WHERE (Post_post_id = ${pid} ) and (User_user_id = ${uid});`;
   res.json("success remove likeing post");
 });
 
