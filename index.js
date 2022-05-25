@@ -198,7 +198,7 @@ app.post("/likePost", validateToken, async (req, res) => {
 app.post("/removeLike", validateToken, async (req, res) => {
   const { pid } = req.body;
   const uid = req.user.id;
-  const removeLike = await prisma..$queryRaw`DELETE FROM heroku_d1efb482b264d10.Like WHERE (Post_post_id = ${pid} ) and (User_user_id = ${uid});`;
+  const removeLike = await prisma.$queryRaw`DELETE FROM heroku_d1efb482b264d10.Like WHERE (Post_post_id = ${pid} ) and (User_user_id = ${uid});`;
   res.json("success remove likeing post");
 });
 
