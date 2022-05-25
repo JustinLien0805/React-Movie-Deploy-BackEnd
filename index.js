@@ -35,6 +35,7 @@ app.use(
   cors({
     origin: "https://profound-seahorse-6f3f2b.netlify.app",
     credentials: true,
+    method:["POST","GET"]
   })
 );
 app.use(express.json());
