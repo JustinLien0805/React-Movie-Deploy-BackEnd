@@ -126,6 +126,17 @@ app.post("/avg", async (req, res) => {
   res.json(avg);
 });
 
+// select moives by genre
+app.post("/genre", async (req, res) => {
+  const { genre } = req.body;
+  const movies = await prisma.Movie.findMany({
+    where: {
+      genre: genre,
+    },
+  });
+  res.json(movies);
+});
+
 //  ************************** Detail **********************************
 // get specific movie and posts by id
 app.post("/searchById", async (req, res) => {
